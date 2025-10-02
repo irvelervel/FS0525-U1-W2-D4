@@ -188,3 +188,78 @@ removeElementFromArray(names, 0)
 console.log(names)
 removeElementFromArray(names, 2)
 console.log(names)
+
+// I VALORI DI RITORNO NELLE FUNZIONI (OUTPUT)
+// Una funzione, opzionalmente, può decidere al termine della sua catena di operazioni
+// di RITORNARE il risultato di quello che ha prodotto. In questo modo può inserirsi
+// meglio in una sequenza di operazioni, in cui ogni funzione produce un risultato
+// solamente parziale da fornire poi allo step successivo.
+
+// dobbiamo creare una serie di istruzioni per elevare un numero al quadrato, poi
+// aggiungerci 10 e infine trovare il suo resto della divisione con 5.
+
+// proviamo a eseguire queste operazioni in una SINGOLA funzione:
+
+const calcoloComplesso = function (partenza) {
+  let risultato = 0
+  // step 1)
+  risultato = partenza * partenza // fatto il quadrato
+  // step 2)
+  risultato = risultato + 10 // pro version risultato += 10
+  // step 3)
+  risultato = risultato % 5
+  //   alert(risultato)
+}
+
+calcoloComplesso(4) // 1?
+// questa funzione esegue il suo scopo, ma è poco adattabile a situazioni in cui
+// uno degli step magari viene invertito ad un altro oppure nelle situazioni in cui
+// il 70% della funzione debba rimanere lo stesso ma avete un 30% di codice che
+// cambia spesso nelle invocazioni...
+
+// proviamo a scorporare questi 3 step in funzioni piccole e separate
+
+const elevaAlQuadrato = function (valoreIniziale) {
+  let risultato = 0
+  risultato = valoreIniziale * valoreIniziale
+  // return va inserito come ULTIMA riga di una funzione
+  // la funzione a questo punto terminerà e RITORNERÀ il valore dopo la parola return
+  return risultato
+}
+
+const aggiungici10 = function (valoreIniziale) {
+  let risultato = 0
+  risultato = valoreIniziale + 10
+  return risultato
+}
+
+const modulo5 = function (valoreIniziale) {
+  let risultato = 0
+  risultato = valoreIniziale % 5
+  return risultato
+}
+
+// ora l'INVOCAZIONE di elevaAlQuadrato(4) VALE IL NUMERO 16
+// quindi regola -> se una funzione è dotata di valore di ritorno, la sua INVOCAZIONE
+// VALE il valore ritornato
+const step1 = elevaAlQuadrato(4)
+console.log('STEP1 VALE', step1)
+
+const step2 = aggiungici10(step1)
+// ho calcolato il primo step!
+
+const step3 = modulo5(step2)
+
+console.log('STEP3', step3) // risultato finale, cioè 1
+
+// modulo5(aggiungici10(elevaAlQuadrato(4))) // 1 (extreme)
+
+// i valori di ritorno NON SEMPRE servono! se una funzione deve eseguire un compito
+// e il risultato di questo compito non interessa a nessuno, non ha bisogno di un
+// return! ma se invece i dati al suo interno, il prodotto che ha calcolato, il risultato
+// che ha ottenuto ti serve per dei passaggi successivi o ci vuoi fare altro in fasi ulteriori
+// hai BISOGNO di ritornarlo dalla funzione, perchè altrimenti quel dato è perso
+// una volta terminata la funzione!
+// se lo ritorni invece l'ESECUZIONE DELLA FUNZIONE vale quanto il suo valore di ritorno
+
+console.log(elevaAlQuadrato(4) + 5) // 16 + 5
