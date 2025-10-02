@@ -263,3 +263,77 @@ console.log('STEP3', step3) // risultato finale, cioè 1
 // se lo ritorni invece l'ESECUZIONE DELLA FUNZIONE vale quanto il suo valore di ritorno
 
 console.log(elevaAlQuadrato(4) + 5) // 16 + 5
+
+// ESERCIZI SULLE FUNZIONI
+
+// a) dovete creare una funzione che ritagli i primi 3 caratteri di una stringa
+// fornita come parametro, li metta in maiuscolo e li stampi in console
+
+const functionA = function (str) {
+  let ritaglio = str.slice(0, 3)
+  ritaglio = ritaglio.toUpperCase()
+  console.log(ritaglio)
+}
+
+functionA('epicode')
+
+// b) crea una funzione che riceve due numeri come parametri. La funzione deve farne
+// la somma, e verificarne il modulo con il numero 3. Se questo modulo è 0 la funzione
+// deve ritornare TRUE, altrimenti deve ritornare FALSE
+
+const functionB = function (num1, num2) {
+  let risultato = num1 + num2
+  risultato = risultato % 3
+  if (risultato === 0) {
+    return true
+  } else {
+    return false
+  }
+}
+
+functionB(6, 7) // false
+functionB(30, 9) // true
+
+console.log(functionB(30, 9))
+
+// c)
+// scrivi una funzione che calcoli un numero casuale tra 1 e 20. Se il risultato
+// ottenuto è maggiore di 10 ritorna la stringa "testa", altrimenti ritorna "croce".
+const testaOCroce = function () {
+  const randomNumber = Math.ceil(Math.random() * 20) // 0.00000021 - 19.99999999
+  if (randomNumber > 10) {
+    return 'testa'
+  } else {
+    return 'croce'
+  }
+}
+
+console.log('Lancio una moneta: è uscito', testaOCroce())
+
+// d) FINAL BOSS
+// Scrivi una funzione che riceva una stringa come parametro: la funzione deve
+// ritornare quella stessa stringa ma con la prima e l'ultima lettera in maiuscolo.
+
+const transformString = function (s) {
+  // prendo la prima lettera della stringa e la metto in maiuscolo
+  const first = s.charAt(0).toUpperCase() // con la stringa 'epicode' tornerebbe 'E'
+  const last = s.charAt(s.length - 1).toUpperCase() // con la stringa 'epicode' tornerebbe 'E'
+  console.log('FIRST', first)
+  console.log('LAST', last)
+  const inside = s.slice(1, -1) // 'picod'
+  let finalString
+  // misura di sicurezza per evitare di duplicare l'unico carattere di una stringa
+  // con lunghezza 1
+  if (s.length === 1) {
+    finalString = first
+  } else {
+    finalString = first + inside + last
+  }
+  console.log(finalString) // verifico in console il risultato!
+  return finalString
+}
+
+transformString('epicode')
+transformString('ciao mi chiamo stefano')
+transformString('c')
+transformString('fa')
